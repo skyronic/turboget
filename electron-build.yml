@@ -1,0 +1,8 @@
+appId: "com.turbogetapp"
+asar: false
+artifactName: "${productName}-${version}.${ext}"
+#nsis:
+#  oneClick: false
+# TODO: use a different approach than disabling asar
+#asarUnpack:
+#  - "node_modules/aria2c-static-electron/**/*"

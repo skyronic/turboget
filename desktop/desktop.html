@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./out/lib.css" />
+    <link rel="stylesheet" href="./out/style.css" />
+    <title>TurboGet</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      require("./out/app.js");
+    </script>
+
+    <div id="error_display" style="display:none">
+      <div id="error_window">
+        <div class="error-title" id="error_title"></div>
+        <div class="error-body d-flex flex-column">
+          <div>
+            <p id="error_text"></p>
+            <p>
+              Please see the
+              <a href="http://turboget.co/help.html">Help Page</a> for
+              information on sharing logs and contacting support.
+            </p>
+          </div>
+          <textarea class="error-logs flex-grow-1 mb-3" id="error_logs">
+          </textarea>
+          <div class="">
+            <a href="#" onclick="window.location.reload();" class="btn btn-primary float-right">Reload App</a>
+            <a href="#" id="copy_logs" class="btn btn-info mr-2 float-right">Copy Logs to Clipboard</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

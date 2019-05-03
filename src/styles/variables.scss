@@ -1,0 +1,36 @@
+@mixin mont_font($style, $weight) {
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: $style;
+    font-display: swap;
+    font-weight: $weight;
+    src: url(quote("./fonts/montserrat-latin-" + $weight + if($style == 'normal','', $style)  + ".woff2")) format('woff2'), /* Super Modern Browsers */
+  }
+}
+
+@include mont_font(normal, 100);
+@include mont_font(italic, 100);
+@include mont_font(normal, 200);
+@include mont_font(italic, 200);
+@include mont_font(normal, 300);
+@include mont_font(italic, 300);
+@include mont_font(normal, 400);
+@include mont_font(italic, 400);
+@include mont_font(normal, 500);
+@include mont_font(italic, 500);
+@include mont_font(normal, 600);
+@include mont_font(italic, 600);
+@include mont_font(normal, 700);
+@include mont_font(italic, 700);
+@include mont_font(normal, 800);
+@include mont_font(italic, 800);
+@include mont_font(normal, 900);
+@include mont_font(italic, 900);
+
+//$font-family-base: "Montserrat";
+$font-size-base:0.9rem;
+
+$primary:#3490dc;
+
+$border-radius: 0
+

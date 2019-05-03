@@ -1,0 +1,52 @@
+{
+  "name": "turboget",
+  "description": "Desktop app to manage seedboxes",
+  "version": "0.1.0",
+  "author": "Anirudh Sanjeev <skyronic@gmail.com>",
+  "dependencies": {
+    "aria2c-static-electron": "^1.0.2",
+    "xmlrpc": "^1.3.2"
+  },
+  "main": "desktop/desktop.js",
+  "scripts": {
+    "app": "electron .",
+    "styles": "node-sass --source-map true --watch \"src/styles/style.scss\" \"desktop/out/style.css\"",
+    "styles-lib": "node-sass --source-map true --watch \"src/styles/lib.scss\" \"desktop/out/lib.css\"",
+    "styles-build": "node-sass --source-map true \"src/styles/\" -o \"desktop/out/\"",
+    "dev": "webpack --watch",
+    "build": "webpack && yarn styles-build",
+    "installer": "electron-builder --config=electron-build.yml"
+  },
+  "devDependencies": {
+    "aria2": "^4.0.3",
+    "axios": "^0.18.0",
+    "basic-ftp": "^3.4.4",
+    "bootstrap": "^4.3.1",
+    "bootstrap-vue": "^2.0.0-rc.18",
+    "bytes": "^3.1.0",
+    "css-loader": "^2.1.1",
+    "electron": "^5.0.0",
+    "electron-builder": "^20.39.0",
+    "electron-packager": "^13.1.1",
+    "lodash": "^4.17.11",
+    "node-sass": "^4.11.0",
+    "parse-torrent": "^6.1.2",
+    "postcss-loader": "^3.0.0",
+    "prettier": "^1.17.0",
+    "remove-trailing-slash": "^0.1.0",
+    "request": "^2.88.0",
+    "request-digest": "^1.0.13",
+    "slugify": "^1.3.4",
+    "ssh2": "^0.8.2",
+    "style-loader": "^0.23.1",
+    "tailwindcss": "^0.7.4",
+    "typeface-montserrat": "^0.0.54",
+    "url-parse": "^1.4.7",
+    "vue": "^2.6.10",
+    "vue-loader": "^15.7.0",
+    "vue-template-compiler": "^2.6.10",
+    "vuex": "^3.1.0",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.0"
+  }
+}
