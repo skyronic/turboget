@@ -73,11 +73,15 @@
               </b-form-text>
             </b-form-group>
             <b-form-radio-group v-model="config.download.http.auth">
-              <b-form-radio value="basic-server">Basic Auth [use server credentials]</b-form-radio>
-              <b-form-radio value="basic-custom">Basic Auth [custom credentials]</b-form-radio>
-              <b-form-radio value="digest-server">Digest</b-form-radio>
+              <b-form-radio value="basic">Basic Auth</b-form-radio>
+              <b-form-radio value="digest">Digest Auth</b-form-radio>
             </b-form-radio-group>
-            <div v-if="config.download.http.auth === 'basic-custom'">
+            <b-form-checkbox class="mt-2"
+                    v-model="config.download.http.server_creds">
+              Use Server Credentials
+            </b-form-checkbox>
+
+            <div v-if="!config.download.http.server_creds">
               <div class="row mt-3">
                 <b-form-group label="Username (downloads):" class="col-md-6">
                   <b-form-input
@@ -92,7 +96,7 @@
                 </b-form-group>
               </div>
             </div>
-            <config-test button-text="Test HTTP Config" :server-config="config" test-name="http"></config-test>
+            <config-test button-text="Test HTTP Config" :server-config="config" test-name="http" class="mt-2"></config-test>
           </div>
         </div>
 

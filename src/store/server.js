@@ -11,6 +11,18 @@ function addDefaults (item) {
   },item);
   let defaultConfig = _.cloneDeep(ds.server.items[0].config);
   item.config = _.merge(defaultConfig, item.config);
+
+  // migrate old settings into new format
+  if(item.config.download.http.auth === "basic-custom") {
+    item.config.download.http.auth = "basic";
+    item.config.download.http.server_creds = false;
+    info("Migrated settings - basic-custom");
+  } else if (item.config.download.http.auth === "basic-server") {
+    item.config.download.http.auth = "basic";
+    item.config.download.http.server_creds = false;
+    info("Migrated settings - basic-custom");
+  }
+
   return item;
 }
 

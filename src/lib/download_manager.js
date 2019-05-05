@@ -14,8 +14,7 @@ let rts = require("remove-trailing-slash");
 
 let adm = null;
 let ap = null;
-let secret = "foobar"//  + _.random(0, 1000);
-console.log("Aria secret is ", secret);
+let secret = "foobar"  + _.random(0, 1000);
 
 const downloadHttp = async (url, dir, config) => {
   let ariaConfig = {};
@@ -23,14 +22,19 @@ const downloadHttp = async (url, dir, config) => {
   ariaConfig["dir"] = dir;
   // ariaConfig["max-download-limit"] = "400K";
 
-  if(config.download.http.auth === "basic-server") {
-    ariaConfig["http-user"] = config.username;
-    ariaConfig["http-passwd"] = config.password;
-  } else if (config.download.http.auth === "basic-custom") {
-    ariaConfig["http-user"] = config.download.http.username;
-    ariaConfig["http-passwd"] = config.download.http.password;
-  } else if (config.download.http.auth === "digest-server") {
-    let digest_builder = new HttpDigest(config.username, config.password);
+  let username = config.username;
+  let password = config.password;
+
+  if(!config.download.http.server_creds) {
+    username = config.download.http.username;
+    password = config.download.http.password;
+  }
+
+  if(config.download.http.auth === 'basic') {
+    ariaConfig["http-user"] = username;
+    ariaConfig["http-passwd"] = password;
+  } else if (config.download.http.auth === 'digest') {
+    let digest_builder = new HttpDigest(username, password);
     let [err] = await digest_builder.setup("GET", url);
     if(err) {
       warn("error setting up digest header");

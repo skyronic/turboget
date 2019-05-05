@@ -29,7 +29,8 @@ export default {
             mode: "http",
             http: {
               baseUrl: "",
-              auth: "basic-server",
+              auth: "basic",
+              server_creds: false,
               username: "",
               password: ""
             },
