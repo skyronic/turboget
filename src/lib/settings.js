@@ -41,6 +41,9 @@ const writeSettingsToFile = function(settings) {
 function addSettingsToStore(settings) {
   store.commit("server/restoreFromSettings", {items: settings.server.items});
   store.commit("library/restoreFromSettings", {items: settings.library.items});
+
+  // If any migrations are made, be sure to re-write them into the file
+  updateSettingsFile();
 }
 
 export const updateSettingsFile = function() {

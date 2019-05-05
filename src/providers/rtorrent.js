@@ -13,16 +13,6 @@ let rts = require("remove-trailing-slash");
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
-export const createRTorrentClient = function(config) {
-  return xmlrpc.createSecureClient({
-    url: rts(config.url) + "/plugins/httprpc/action.php",
-    basic_auth: {
-      user: config.username,
-      pass: config.password
-    }
-  });
-};
-
 const torrent_schema = [
   // key, call param, parse int
   ["hash", "d.hash=", false],
@@ -64,17 +54,7 @@ export const makeRTorrentProvider = function(config) {
   // let client = createRTorrentClient(config);
   let digest_builder = new HttpDigest(config.username, config.password);
 
-  function callMethod(method, params) {
-    // return new Promise((resolve, reject) => {
-    //   client.methodCall(method, params, (error, value) => {
-    //     if (error) {
-    //       warn("XML RPC Error: ", error);
-    //       resolve([true, null]);
-    //     } else {
-    //       resolve([false, value]);
-    //     }
-    //   });
-    // });
+  this.callMethod = function(method, params = []) {
     return new Promise(async (resolve, reject) => {
       let url = rts(config.url) + "/plugins/httprpc/action.php";
 
@@ -134,6 +114,10 @@ export const makeRTorrentProvider = function(config) {
       });
     });
   }
+
+  let callMethod = this.callMethod;
+
+
   this.fetchTorrents = async function() {
     let [error, response] = await callMethod(
       "d.multicall2",
