@@ -1,7 +1,7 @@
 {
   "name": "turboget",
   "description": "Desktop app to manage seedboxes",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Anirudh Sanjeev <skyronic@gmail.com>",
   "license": "MIT",
   "dependencies": {

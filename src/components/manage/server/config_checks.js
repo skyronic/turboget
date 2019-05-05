@@ -129,7 +129,7 @@ export const checkHttpConfig = async config => {
     return [true, "Does not appear to be digest auth"];
   }
 
-  if (httpConfig.auth.server_creds) {
+  if (httpConfig.server_creds) {
     username = config.username;
     password = config.password;
   }

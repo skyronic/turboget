@@ -19,7 +19,7 @@ function addDefaults (item) {
     info("Migrated settings - basic-custom");
   } else if (item.config.download.http.auth === "basic-server") {
     item.config.download.http.auth = "basic";
-    item.config.download.http.server_creds = false;
+    item.config.download.http.server_creds = true;
     info("Migrated settings - basic-custom");
   }
 
