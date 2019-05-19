@@ -65,6 +65,13 @@ export const serverModule = {
         }
       });
     },
+    // get keys of all servers which are ready for fetching
+    readyKeys (state) {
+      return _.chain(state.items)
+        .filter(val => val.config.configReady)
+        .map('key')
+        .value();
+    },
     items (state) {
       return state.items;
     }

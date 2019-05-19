@@ -42,16 +42,6 @@ export default {
   },
   mounted() {
     this.setConnState({key: this.serverKey, connState:"connecting"});
-    let tryConnect = () => {
-      if(this.server.connState === "error") {
-        return;
-      }
-      if (this.server.config.configReady) this.refreshTorrents(this.serverKey);
-    };
-    setInterval(() => {
-      tryConnect();
-    }, 2000);
-    tryConnect();
   },
   components: {
     TorrentList,

@@ -30,13 +30,14 @@ const downloadHttp = async (url, dir, config) => {
     password = config.download.http.password;
   }
 
-  if(config.download.http.auth === 'basic') {
+  if (config.download.http.auth === 'basic') {
+
     ariaConfig["http-user"] = username;
     ariaConfig["http-passwd"] = password;
   } else if (config.download.http.auth === 'digest') {
     let digest_builder = new HttpDigest(username, password);
     let [err] = await digest_builder.setup("GET", url);
-    if(err) {
+    if (err) {
       warn("error setting up digest header");
       return [err];
     }

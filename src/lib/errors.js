@@ -2,6 +2,7 @@ import _ from "lodash";
 import mget from "util/mget";
 import { info, debug, warn, getLogText } from "util/log";
 import Vue from 'vue';
+import {stopRefreshManager} from "lib/refresh_manager";
 let electron = window.require("electron");
 
 let domReady = false;
@@ -22,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
 } );
 
 export const showError = ({ title = "Unknown Error", message = ""}) => {
+  stopRefreshManager();
+
   warn("Error: "+ title + "\n" + message);
 
   if(domReady) {

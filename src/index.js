@@ -6,6 +6,7 @@ import store from "store";
 import { initDownloadManager } from "lib/download_manager";
 import {initUpdateManager} from "lib/update_manager";
 import {showError, startErrorMonitoring} from "lib/errors";
+import {initRefreshManager} from "lib/refresh_manager";
 
 let pjson = require('../package.json');
 
@@ -19,6 +20,7 @@ startErrorMonitoring();
 initSettings()
   .then(() => {
     initUpdateManager(pjson.version);
+    initRefreshManager();
     return initDownloadManager();
   })
   .then(() => {
