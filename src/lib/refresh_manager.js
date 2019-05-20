@@ -43,7 +43,9 @@ function shouldRefreshServer (server) {
   let hasError = (server.connState === "error");
   let attempts = getErrorAttempts(server.key);
   let torrentsForServer = store.getters['torrent/forServer'](server.key);
-  let torrentsAreActive = _.findIndex(torrentsForServer, ['running_state', 1]) !== -1;
+  let torrentsAreActive = _.findIndex(torrentsForServer, function (val) {
+    return parseInt(val.info.left) > 0
+  }) !== -1;
 
   if(hasError) {
     if(ticksSinceLastRefresh <= SERVER_ERROR_RETRY_DELAY) {
@@ -89,7 +91,7 @@ function doTick() {
     let server = mget.server.fromKey(key);
     let [refreshFlag, refreshReason = "", newConnState = null] = shouldRefreshServer(server);
     if(refreshFlag) {
-      debug("Refreshing for reason - " + refreshReason);
+      // debug("Refreshing for reason - " + refreshReason);
       lastRefresh[key] = ticks;
       store.dispatch('server/refresh', {key, connState:newConnState});
     }

@@ -51,11 +51,26 @@ const schemaToQuery = function(schema, params) {
 };
 
 export const makeRTorrentProvider = function(config) {
-  // let client = createRTorrentClient(config);
-  let digest_builder = new HttpDigest(config.username, config.password);
+  let digest_builder = null;
+
+  let call_count = 0;
+
+  let resetDigest = function () {
+    digest_builder = null
+    digest_builder = new HttpDigest(config.username, config.password);
+  };
 
   this.callMethod = function(method, params = []) {
     return new Promise(async (resolve, reject) => {
+      // Reset the digest auth every 10 API calls
+      // this is because the digest auth headers can expire and result in 401 errors
+      //
+      // This also initializes digest_builder on the first time the method is called.
+      if(call_count % 10 === 0) {
+        resetDigest();
+      }
+      call_count ++;
+
       let url = rts(config.url) + "/plugins/httprpc/action.php";
 
       let request_content = Serializer.serializeMethodCall(method, params);
