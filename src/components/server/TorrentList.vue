@@ -84,6 +84,7 @@ import mget from "util/mget";
 import { info, debug, warn } from "util/log";
 import StatusButton from "components/server/StatusButton";
   import {makeProvider} from "../../providers";
+  import {forceServerRefresh} from "lib/refresh_manager";
 let parseTorrent = require("parse-torrent");
 let bytes = require("bytes");
 
@@ -99,9 +100,6 @@ export default {
     ...mapMutations({
       selectTorrent: "ui/setTorrent"
     }),
-    ...mapActions({
-      serverRefresh: "server/refresh"
-    }),
     formatSpeed(val) {
       return bytes(val) + "/s";
     },
@@ -115,7 +113,7 @@ export default {
       return t.info.running_state === 1;
     },
     retryConnection() {
-      this.$store.dispatch("server/refresh", {
+      forceServerRefresh({
         key: this.serverKey,
         connState: "connecting"
       });
@@ -141,7 +139,7 @@ export default {
       }
 
       // everything succeeded. Close the modal and refresh server
-      this.serverRefresh({key: this.serverKey});
+      forceServerRefresh({key: this.serverKey});
       this.$refs.add_modal.hide();
     }
   },

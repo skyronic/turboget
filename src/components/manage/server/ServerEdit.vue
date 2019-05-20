@@ -154,6 +154,7 @@ import { info, debug, warn } from "util/log";
 import ConfigTest from "components/manage/server/ConfigTest";
 import default_settings from 'lib/default_settings';
 import {updateSettingsFile} from "lib/settings";
+  import {forceServerRefresh} from "lib/refresh_manager";
 
 export default {
   data() {
@@ -167,7 +168,6 @@ export default {
       'saveServerConfig': "server/setConfig"
     }),
     ...mapActions ({
-      'serverRefresh': "server/refresh"
     }),
     saveConfig() {
       this.config.configReady = true;
@@ -175,10 +175,8 @@ export default {
       updateSettingsFile();
       this.refreshConfig();
 
-      // if server is currently in error, refresh it
-      let server = mget.server.fromKey(this.serverKey);
-      if(server.connState === "error")
-        this.serverRefresh({key: this.serverKey, connState: "connecting"});
+      // Force a refresh regardless of the current situation
+      forceServerRefresh({key: this.serverKey, connState: "connecting"});
     },
     refreshConfig () {
       let server = mget.server.fromKey(this.serverKey);

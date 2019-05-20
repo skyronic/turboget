@@ -41,7 +41,7 @@ export default {
     })
   },
   mounted() {
-    this.setConnState({key: this.serverKey, connState:"connecting"});
+    // this.setConnState({key: this.serverKey, connState:"connecting"});
   },
   components: {
     TorrentList,
@@ -52,7 +52,7 @@ export default {
   },
   watch: {
     serverKey() {
-      this.setConnState({key: this.serverKey, connState:"connecting"});
+      // this.setConnState({key: this.serverKey, connState:"connecting"});
     }
   },
   computed: {

@@ -65,6 +65,11 @@ export const torrentModule = {
     items(state) {
       return state.items;
     },
+    forServer (state) {
+      return serverKey => {
+        return _.filter(state.items, val => val.server === serverKey)
+      }
+    }
   }
 };
 

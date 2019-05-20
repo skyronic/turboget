@@ -17,9 +17,10 @@ export const error = (message, context = {}) => {
   console.log(message, context)
 };
 export const debug = (message, context = {}) => {
-  addLogText(message, context);
+  // don't add it to internal logs but write to console
   console.log(message, context)
 };
+
 export const info = (message, context = {}) => {
   addLogText(message, context);
   console.log(message, context)

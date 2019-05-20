@@ -7,7 +7,7 @@ import ds from '../lib/default_settings'
 // perform migration of old settings to new as well here
 function addDefaults (item) {
   item = _.extend({
-    connState: "down"
+    connState: "connecting"
   },item);
   let defaultConfig = _.cloneDeep(ds.server.items[0].config);
   item.config = _.merge(defaultConfig, item.config);
