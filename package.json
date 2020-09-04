@@ -30,7 +30,7 @@
     "electron-builder": "^20.39.0",
     "electron-packager": "^13.1.1",
     "lodash": "^4.17.11",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "parse-torrent": "^6.1.2",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.17.0",
